@@ -4,6 +4,7 @@ name=Land It
 description=Land It is a plugin to calculate elevations or 3D length and savec the results in the layer.
 version=1.0
 qgisMinimumVersion=1.9
+icon=resources/landit.png
 
 tags=DTM,DEM,terrain,elevation,ground
 homepage=https://github.com/3nids/landit/wiki

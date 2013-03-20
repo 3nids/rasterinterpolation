@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/plugins/landit" >
-        <file>landit.png</file>
+        <file>icons/landit.png</file>
     </qresource>
 </RCC>
