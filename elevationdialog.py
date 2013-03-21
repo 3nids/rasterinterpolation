@@ -15,7 +15,7 @@ from ui.ui_landit import Ui_LandIt
 
 from mysettings import MySettings, landItSettings
 from qgistools.pluginsettings.pluginsettings import PluginSettings
-from qgistools.layerfieldcombomanager import LayerCombo, FieldCombo
+from qgistools.gui.layerfieldcombomanager import LayerCombo, FieldCombo
 
 class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 	def __init__(self, iface):
@@ -26,8 +26,12 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		setValueOnWidgetUpdate    = True
 		PluginSettings.__init__(self, landItSettings, setValuesOnDialogAccepted, setValueOnWidgetUpdate)
 		
-		self.dtmLayerCombo    = LayerCombo(iface, self.dtmLayer, lambda: self.value("dtmLayer"), True)
+		self.dtmLayerCombo    = LayerCombo(iface, self.dtmLayer, lambda: self.value("dtmLayer"), False)
 		self.sourceLayerCombo = LayerCombo(iface, self.sourceLayer, lambda: self.value("sourceLayer"), True)
-		self.destinationFieldCombo = FieldCombo(self.destinationField,   self.sourceLayerCombo, lambda: self.value("destinationField"))
+		self.destinationFieldCombo = FieldCombo(self.destinationField, self.sourceLayerCombo, lambda: self.value("destinationField"))
+
+	def showEvent(self, e):
+		PluginSettings.showEvent(self, e)
+		self.progressBar.hide()
 
 

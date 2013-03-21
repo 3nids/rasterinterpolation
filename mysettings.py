@@ -8,20 +8,19 @@ Jan. 2013
 """
 from PyQt4.QtGui import QColor,QDialog
 
-from qgistools.pluginsettings.pluginsettings import PluginSettings
-from qgistools.pluginsettings.setting import Setting
+from qgistools.pluginsettings import *
 
 pluginName = "landit"
 landItSettings = [
 		# global settings
-		Setting(pluginName, "interpolationMethod", "global", "string" , ""     , {"comboMode": "text"} ),
-		Setting(pluginName, "processOnlyNull"    , "global", "bool"   , False  )                        ,
+		String( pluginName, "interpolationMethod", "global",  ""     , {"comboMode": "text"} ),
+		Bool(   pluginName, "processOnlyNull"    , "global",  False  )                        ,
 		# project settings
-		Setting(pluginName, "additionValue"      , "project", "double", 0      )                        ,
+		Double( pluginName, "additionValue"      , "project", 0      )                        ,
 		# fields and layers
-		Setting(pluginName, "dtmLayer"           , "project", "string", ""     )                        ,
-		Setting(pluginName, "sourceLayer"        , "project", "string", ""     )                        ,
-		Setting(pluginName, "destinationField"   , "project", "string", ""     )
+		String( pluginName, "dtmLayer"           , "project", ""     )                        ,
+		String( pluginName, "sourceLayer"        , "project", ""     )                        ,
+		String( pluginName, "destinationField"   , "project", ""     )
 		]
 
 class MySettings(PluginSettings):

@@ -79,14 +79,14 @@
     </widget>
    </item>
    <item row="7" column="0" colspan="3">
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="processOnlyNull">
      <property name="text">
       <string>Only process point where destination field is NULL</string>
      </property>
     </widget>
    </item>
    <item row="8" column="2">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="doButton">
      <property name="text">
       <string>GO</string>
      </property>
@@ -196,7 +196,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <widget class="QDoubleSpinBox" name="additionValue">
         <property name="minimum">
          <double>-999.990000000000009</double>
         </property>
