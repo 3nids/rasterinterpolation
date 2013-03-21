@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_landit.ui'
 #
-# Created: Thu Mar 21 08:03:01 2013
+# Created: Thu Mar 21 09:38:01 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_LandIt(object):
     def setupUi(self, LandIt):
         LandIt.setObjectName(_fromUtf8("LandIt"))
-        LandIt.resize(384, 259)
+        LandIt.resize(384, 257)
         self.gridLayout = QtGui.QGridLayout(LandIt)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.widget_2 = QtGui.QWidget(LandIt)
@@ -29,8 +29,6 @@ class Ui_LandIt(object):
         self.label_4 = QtGui.QLabel(self.widget_2)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.gridLayout_3.addWidget(self.label_4, 0, 0, 1, 1)
-        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_3.addItem(spacerItem, 0, 2, 1, 1)
         self.dtmLayer = QtGui.QComboBox(self.widget_2)
         self.dtmLayer.setObjectName(_fromUtf8("dtmLayer"))
         self.gridLayout_3.addWidget(self.dtmLayer, 0, 1, 1, 1)
@@ -41,14 +39,12 @@ class Ui_LandIt(object):
         self.gridLayout_4.setMargin(0)
         self.gridLayout_4.setMargin(0)
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
-        self.label = QtGui.QLabel(self.widget_3)
-        self.label.setObjectName(_fromUtf8("label"))
-        self.gridLayout_4.addWidget(self.label, 1, 0, 1, 1)
         self.sourceLayer = QtGui.QComboBox(self.widget_3)
         self.sourceLayer.setObjectName(_fromUtf8("sourceLayer"))
         self.gridLayout_4.addWidget(self.sourceLayer, 1, 1, 1, 1)
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_4.addItem(spacerItem1, 1, 2, 1, 1)
+        self.label = QtGui.QLabel(self.widget_3)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.gridLayout_4.addWidget(self.label, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.widget_3, 1, 0, 1, 3)
         self.processOnlyNull = QtGui.QCheckBox(LandIt)
         self.processOnlyNull.setObjectName(_fromUtf8("processOnlyNull"))
@@ -75,8 +71,6 @@ class Ui_LandIt(object):
         self.label_3 = QtGui.QLabel(self.widget_4)
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.gridLayout_5.addWidget(self.label_3, 0, 0, 1, 1)
-        spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_5.addItem(spacerItem2, 0, 2, 1, 1)
         self.gridLayout.addWidget(self.widget_4, 5, 0, 1, 3)
         self.widget = QtGui.QWidget(LandIt)
         self.widget.setObjectName(_fromUtf8("widget"))
@@ -84,14 +78,12 @@ class Ui_LandIt(object):
         self.gridLayout_2.setMargin(0)
         self.gridLayout_2.setMargin(0)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
-        self.label_2 = QtGui.QLabel(self.widget)
-        self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.gridLayout_2.addWidget(self.label_2, 1, 0, 1, 1)
         self.destinationField = QtGui.QComboBox(self.widget)
         self.destinationField.setObjectName(_fromUtf8("destinationField"))
         self.gridLayout_2.addWidget(self.destinationField, 1, 3, 1, 1)
-        spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem3, 1, 4, 1, 1)
+        self.label_2 = QtGui.QLabel(self.widget)
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.gridLayout_2.addWidget(self.label_2, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.widget, 4, 0, 1, 3)
         self.widget_5 = QtGui.QWidget(LandIt)
         self.widget_5.setObjectName(_fromUtf8("widget_5"))
@@ -107,8 +99,8 @@ class Ui_LandIt(object):
         self.additionValue.setMaximum(999.99)
         self.additionValue.setObjectName(_fromUtf8("additionValue"))
         self.gridLayout_6.addWidget(self.additionValue, 0, 1, 1, 1)
-        spacerItem4 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout_6.addItem(spacerItem4, 0, 2, 1, 1)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout_6.addItem(spacerItem, 0, 2, 1, 1)
         self.gridLayout.addWidget(self.widget_5, 6, 0, 1, 3)
 
         self.retranslateUi(LandIt)
