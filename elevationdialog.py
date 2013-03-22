@@ -54,7 +54,8 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		self.continueProcess = True
 		dtmLayer = self.dtmLayerCombo.getLayer()
 		vectorLayer = self.vectorLayerCombo.getLayer()
-		field = self.destinationFieldCombo.getFieldName()
+		fieldIdx = self.destinationFieldCombo.getFieldIndex()
+		fieldName = self.destinationFieldCombo.getFieldName()
 		interpol = self.interpolationMethod.currentIndex()
 		
 		if dtmLayer    is None: 
@@ -63,10 +64,10 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		if vectorLayer is None:
 			self.messageLabel.setText("specify source layer")
 			return
-		if not vectorLayer.isEditable():
-			self.messageLabel.setText("source layer must editable")
-			return
-		if field == "":
+		#if not vectorLayer.isEditable():
+		#	self.messageLabel.setText("source layer must editable")
+		#	return
+		if fieldName == "":
 			self.messageLabel.setText("choose a field to save elevations")
 			return
 		if interpol == 2 and not scipyAvailable:
@@ -87,29 +88,27 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 				k+=1
 				self.progressBar.setValue(k)
 				vectorLayer.getFeatures( QgsFeatureRequest( id ) ).nextFeature( f )
-				if self.processOnlyNull.isChecked() and not f.attribute(field).isNull():
+				if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
 					continue
-				self.calculateElevation( dtmLayer, vectorLayer, f, field, interpol)
+				self.calculateElevation( dtmLayer, vectorLayer, f, fieldIdx, interpol)
 				QCoreApplication.processEvents()
 				if not self.continueProcess: break
 		else:
 			self.progressBar.setMaximum(vectorLayer.dataProvider().featureCount())
-			featReq = QgsFeatureRequest()
-			self.layer = vectorLayer
-			iter = self.layer.getFeatures( featReq )
+			iter = vectorLayer.getFeatures( QgsFeatureRequest() )
 			while iter.nextFeature( f ):
 				k+=1
 				self.progressBar.setValue(k)
-				if self.processOnlyNull.isChecked() and not f.attribute(field).isNull():
+				if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
 					continue
-				self.calculateElevation( dtmLayer, vectorLayer, f, field, interpol)
+				self.calculateElevation( dtmLayer, vectorLayer, f, fieldIdx, interpol)
 				QCoreApplication.processEvents()
 				if not self.continueProcess: break
 		self.progressBar.hide()
 		self.stopButton.hide()
 
 			
-	def calculateElevation(self, dtmLayer, vectorLayer, f, field, interpolMethod):
+	def calculateElevation(self, dtmLayer, vectorLayer, f, fieldIdx, interpolMethod):
 		prov = dtmLayer.dataProvider()
 		thePoint = f.geometry().asPoint()
 		alt = None
@@ -177,8 +176,10 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 			fz = interpolate.interp2d(vx,vy,vz,kind='cubic')
 			alt = fz(x,y)[0]
 
-		print alt
 		if alt is not None and prov.isNoDataValue( 1, alt ): 
-			alt = None		
-		f.setAttribute( field, QVariant( alt ) )
-		#vectorLayer.updateFeature( f )
+			alt = None
+		res = vectorLayer.changeAttributeValue( f.id(), fieldIdx, QVariant(alt) )
+		print alt, res
+		
+		#res = vectorLayer.dataProvider().changeAttributeValues( {f.id(): {fieldIdx: alt}} )
+		#print alt,res
