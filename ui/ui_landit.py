@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/ui_landit.ui'
 #
-# Created: Thu Mar 21 09:38:01 2013
+# Created: Fri Mar 22 13:51:04 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_LandIt(object):
     def setupUi(self, LandIt):
         LandIt.setObjectName(_fromUtf8("LandIt"))
-        LandIt.resize(384, 257)
+        LandIt.resize(403, 297)
         self.gridLayout = QtGui.QGridLayout(LandIt)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.widget_2 = QtGui.QWidget(LandIt)
@@ -33,15 +33,18 @@ class Ui_LandIt(object):
         self.dtmLayer.setObjectName(_fromUtf8("dtmLayer"))
         self.gridLayout_3.addWidget(self.dtmLayer, 0, 1, 1, 1)
         self.gridLayout.addWidget(self.widget_2, 0, 0, 1, 3)
+        self.processOnlySelected = QtGui.QCheckBox(LandIt)
+        self.processOnlySelected.setObjectName(_fromUtf8("processOnlySelected"))
+        self.gridLayout.addWidget(self.processOnlySelected, 8, 0, 1, 3)
         self.widget_3 = QtGui.QWidget(LandIt)
         self.widget_3.setObjectName(_fromUtf8("widget_3"))
         self.gridLayout_4 = QtGui.QGridLayout(self.widget_3)
         self.gridLayout_4.setMargin(0)
         self.gridLayout_4.setMargin(0)
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
-        self.sourceLayer = QtGui.QComboBox(self.widget_3)
-        self.sourceLayer.setObjectName(_fromUtf8("sourceLayer"))
-        self.gridLayout_4.addWidget(self.sourceLayer, 1, 1, 1, 1)
+        self.vectorLayer = QtGui.QComboBox(self.widget_3)
+        self.vectorLayer.setObjectName(_fromUtf8("vectorLayer"))
+        self.gridLayout_4.addWidget(self.vectorLayer, 1, 1, 1, 1)
         self.label = QtGui.QLabel(self.widget_3)
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout_4.addWidget(self.label, 1, 0, 1, 1)
@@ -49,13 +52,6 @@ class Ui_LandIt(object):
         self.processOnlyNull = QtGui.QCheckBox(LandIt)
         self.processOnlyNull.setObjectName(_fromUtf8("processOnlyNull"))
         self.gridLayout.addWidget(self.processOnlyNull, 7, 0, 1, 3)
-        self.doButton = QtGui.QPushButton(LandIt)
-        self.doButton.setObjectName(_fromUtf8("doButton"))
-        self.gridLayout.addWidget(self.doButton, 8, 2, 1, 1)
-        self.progressBar = QtGui.QProgressBar(LandIt)
-        self.progressBar.setProperty("value", 24)
-        self.progressBar.setObjectName(_fromUtf8("progressBar"))
-        self.gridLayout.addWidget(self.progressBar, 8, 0, 1, 2)
         self.widget_4 = QtGui.QWidget(LandIt)
         self.widget_4.setObjectName(_fromUtf8("widget_4"))
         self.gridLayout_5 = QtGui.QGridLayout(self.widget_4)
@@ -102,21 +98,37 @@ class Ui_LandIt(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.gridLayout_6.addItem(spacerItem, 0, 2, 1, 1)
         self.gridLayout.addWidget(self.widget_5, 6, 0, 1, 3)
+        self.progressBar = QtGui.QProgressBar(LandIt)
+        self.progressBar.setProperty("value", 24)
+        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.gridLayout.addWidget(self.progressBar, 11, 0, 1, 1)
+        self.messageLabel = QtGui.QLabel(LandIt)
+        self.messageLabel.setObjectName(_fromUtf8("messageLabel"))
+        self.gridLayout.addWidget(self.messageLabel, 10, 0, 1, 2)
+        self.doButton = QtGui.QPushButton(LandIt)
+        self.doButton.setObjectName(_fromUtf8("doButton"))
+        self.gridLayout.addWidget(self.doButton, 10, 2, 1, 1)
+        self.stopButton = QtGui.QPushButton(LandIt)
+        self.stopButton.setObjectName(_fromUtf8("stopButton"))
+        self.gridLayout.addWidget(self.stopButton, 11, 2, 1, 1)
 
         self.retranslateUi(LandIt)
-        self.interpolationMethod.setCurrentIndex(1)
+        self.interpolationMethod.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(LandIt)
 
     def retranslateUi(self, LandIt):
         LandIt.setWindowTitle(QtGui.QApplication.translate("LandIt", "LandIt", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("LandIt", "DTM", None, QtGui.QApplication.UnicodeUTF8))
+        self.processOnlySelected.setText(QtGui.QApplication.translate("LandIt", "process only selected features", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("LandIt", "Points from layer", None, QtGui.QApplication.UnicodeUTF8))
-        self.processOnlyNull.setText(QtGui.QApplication.translate("LandIt", "Only process point where destination field is NULL", None, QtGui.QApplication.UnicodeUTF8))
-        self.doButton.setText(QtGui.QApplication.translate("LandIt", "GO", None, QtGui.QApplication.UnicodeUTF8))
+        self.processOnlyNull.setText(QtGui.QApplication.translate("LandIt", "process features only where destination field is NULL", None, QtGui.QApplication.UnicodeUTF8))
         self.interpolationMethod.setItemText(0, QtGui.QApplication.translate("LandIt", "nearest neighbor", None, QtGui.QApplication.UnicodeUTF8))
-        self.interpolationMethod.setItemText(1, QtGui.QApplication.translate("LandIt", "linear interpolation", None, QtGui.QApplication.UnicodeUTF8))
-        self.interpolationMethod.setItemText(2, QtGui.QApplication.translate("LandIt", "cubic interpolation", None, QtGui.QApplication.UnicodeUTF8))
+        self.interpolationMethod.setItemText(1, QtGui.QApplication.translate("LandIt", "bi-linear", None, QtGui.QApplication.UnicodeUTF8))
+        self.interpolationMethod.setItemText(2, QtGui.QApplication.translate("LandIt", "bi-cubic", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("LandIt", "Interpolation method", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("LandIt", "Destination field", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("LandIt", "Add", None, QtGui.QApplication.UnicodeUTF8))
+        self.messageLabel.setText(QtGui.QApplication.translate("LandIt", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
+        self.doButton.setText(QtGui.QApplication.translate("LandIt", "GO", None, QtGui.QApplication.UnicodeUTF8))
+        self.stopButton.setText(QtGui.QApplication.translate("LandIt", "Stop", None, QtGui.QApplication.UnicodeUTF8))
 

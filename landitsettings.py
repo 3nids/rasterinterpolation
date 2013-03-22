@@ -15,14 +15,15 @@ landItSettings = [
 		# global settings
 		String( pluginName, "interpolationMethod", "global",  ""     , {"comboMode": "text"} ),
 		Bool(   pluginName, "processOnlyNull"    , "global",  False  )                        ,
+		Bool(   pluginName, "processOnlySelected", "global",  False  )                        ,
 		# project settings
 		Double( pluginName, "additionValue"      , "project", 0      )                        ,
 		# fields and layers
 		String( pluginName, "dtmLayer"           , "project", ""     )                        ,
-		String( pluginName, "sourceLayer"        , "project", ""     )                        ,
+		String( pluginName, "vectorLayer"        , "project", ""     )                        ,
 		String( pluginName, "destinationField"   , "project", ""     )
 		]
 
-class MySettings(PluginSettings):
+class LandItSettings(PluginSettings):
 	def __init__(self):
-		PluginSettings.__init__(self, landItSettings)
+		PluginSettings.__init__(self, pluginName, landItSettings)
