@@ -13,6 +13,7 @@ from qgis.gui import *
 
 try:
 	from scipy import interpolate
+	from numpy import asscalar
 	scipyAvailable = True
 except:
 	scipyAvailable = False
@@ -64,9 +65,9 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		if vectorLayer is None:
 			self.messageLabel.setText("specify source layer")
 			return
-		#if not vectorLayer.isEditable():
-		#	self.messageLabel.setText("source layer must editable")
-		#	return
+		if not vectorLayer.isEditable():
+			self.messageLabel.setText("source layer must editable")
+			return
 		if fieldName == "":
 			self.messageLabel.setText("choose a field to save elevations")
 			return
@@ -174,12 +175,10 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 					[myBlock.value(1,0),myBlock.value(1,1),myBlock.value(1,2),myBlock.value(1,3)],
 					[myBlock.value(0,0),myBlock.value(0,1),myBlock.value(0,2),myBlock.value(0,3)] ]
 			fz = interpolate.interp2d(vx,vy,vz,kind='cubic')
-			alt = fz(x,y)[0]
+			alt = asscalar( fz(x,y)[0] )
 
 		if alt is not None and prov.isNoDataValue( 1, alt ): 
 			alt = None
-		res = vectorLayer.changeAttributeValue( f.id(), fieldIdx, QVariant(alt) )
-		print alt, res
-		
-		#res = vectorLayer.dataProvider().changeAttributeValues( {f.id(): {fieldIdx: alt}} )
-		#print alt,res
+		res = vectorLayer.changeAttributeValue( f.id(), fieldIdx, alt )
+		#print alt, res
+
