@@ -58,6 +58,7 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		fieldIdx = self.destinationFieldCombo.getFieldIndex()
 		fieldName = self.destinationFieldCombo.getFieldName()
 		interpol = self.interpolationMethod.currentIndex()
+		additionValue = self.additionValue.value()
 		
 		if dtmLayer    is None: 
 			self.messageLabel.setText("specify DTM layer")
@@ -86,30 +87,30 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 			self.progressBar.setMaximum(vectorLayer.selectedFeatureCount())
 			ids = vectorLayer.selectedFeaturesIds()
 			for id in ids:
-				k+=1
-				self.progressBar.setValue(k)
 				vectorLayer.getFeatures( QgsFeatureRequest( id ) ).nextFeature( f )
 				if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
 					continue
-				self.calculateElevation( dtmLayer, vectorLayer, f, fieldIdx, interpol)
+				self.calculateElevation( dtmLayer, vectorLayer, f.id(), fieldIdx, interpol, additionValue)
 				QCoreApplication.processEvents()
 				if not self.continueProcess: break
-		else:
+				k+=1
+				self.progressBar.setValue(k)
+			else:
 			self.progressBar.setMaximum(vectorLayer.dataProvider().featureCount())
 			iter = vectorLayer.getFeatures( QgsFeatureRequest() )
 			while iter.nextFeature( f ):
-				k+=1
-				self.progressBar.setValue(k)
 				if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
 					continue
-				self.calculateElevation( dtmLayer, vectorLayer, f, fieldIdx, interpol)
+				self.calculateElevation( dtmLayer, vectorLayer, f.id(), fieldIdx, interpol, additionValue)
 				QCoreApplication.processEvents()
 				if not self.continueProcess: break
+				k+=1
+				self.progressBar.setValue(k)
 		self.progressBar.hide()
 		self.stopButton.hide()
 
 			
-	def calculateElevation(self, dtmLayer, vectorLayer, f, fieldIdx, interpolMethod):
+	def calculateElevation(self, dtmLayer, vectorLayer, fid, fieldIdx, interpolMethod, additionValue):
 		prov = dtmLayer.dataProvider()
 		thePoint = f.geometry().asPoint()
 		alt = None
@@ -179,6 +180,8 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 
 		if alt is not None and prov.isNoDataValue( 1, alt ): 
 			alt = None
-		res = vectorLayer.changeAttributeValue( f.id(), fieldIdx, alt )
+		if alt is not None:
+			alt += additionValue
+		res = vectorLayer.changeAttributeValue( fid, fieldIdx, alt )
 		#print alt, res
 
