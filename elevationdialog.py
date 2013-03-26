@@ -18,7 +18,6 @@ try:
 except:
 	scipyAvailable = False
 
-
 from ui.ui_landit import Ui_LandIt
 
 from landitsettings import pluginName,landItSettings
@@ -87,30 +86,30 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 			self.progressBar.setMaximum(vectorLayer.selectedFeatureCount())
 			ids = vectorLayer.selectedFeaturesIds()
 			for id in ids:
+				k+=1
+				self.progressBar.setValue(k)
 				vectorLayer.getFeatures( QgsFeatureRequest( id ) ).nextFeature( f )
 				if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
 					continue
-				self.calculateElevation( dtmLayer, vectorLayer, f.id(), fieldIdx, interpol, additionValue)
+				self.calculateElevation( dtmLayer, vectorLayer, f, fieldIdx, interpol, additionValue)
 				QCoreApplication.processEvents()
 				if not self.continueProcess: break
-				k+=1
-				self.progressBar.setValue(k)
-			else:
+		else:
 			self.progressBar.setMaximum(vectorLayer.dataProvider().featureCount())
 			iter = vectorLayer.getFeatures( QgsFeatureRequest() )
 			while iter.nextFeature( f ):
-				if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
-					continue
-				self.calculateElevation( dtmLayer, vectorLayer, f.id(), fieldIdx, interpol, additionValue)
-				QCoreApplication.processEvents()
-				if not self.continueProcess: break
 				k+=1
 				self.progressBar.setValue(k)
+				if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
+					continue
+				self.calculateElevation( dtmLayer, vectorLayer, f, fieldIdx, interpol, additionValue)
+				QCoreApplication.processEvents()
+				if not self.continueProcess: break
 		self.progressBar.hide()
 		self.stopButton.hide()
 
 			
-	def calculateElevation(self, dtmLayer, vectorLayer, fid, fieldIdx, interpolMethod, additionValue):
+	def calculateElevation(self, dtmLayer, vectorLayer, f, fieldIdx, interpolMethod, additionValue):
 		prov = dtmLayer.dataProvider()
 		thePoint = f.geometry().asPoint()
 		alt = None
@@ -182,6 +181,6 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 			alt = None
 		if alt is not None:
 			alt += additionValue
-		res = vectorLayer.changeAttributeValue( fid, fieldIdx, alt )
-		#print alt, res
+		res = vectorLayer.changeAttributeValue( f.id(), fieldIdx, alt )
+		print alt, res
 
