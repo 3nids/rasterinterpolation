@@ -29,13 +29,13 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		QDialog.__init__(self)
 		self.setupUi(self)
 		self.setWindowFlags( Qt.WindowStaysOnTopHint )
-		
+
 		setValuesOnDialogAccepted = False
 		setValueOnWidgetUpdate    = True
 		PluginSettings.__init__(self, pluginName, landItSettings, setValuesOnDialogAccepted, setValueOnWidgetUpdate)
-		
-		self.dtmLayerCombo    = RasterLayerCombo(iface, self.dtmLayer   , lambda: self.value("dtmLayer"))
-		self.vectorLayerCombo = VectorLayerCombo(iface, self.vectorLayer, lambda: self.value("vectorLayer"), True, QGis.Point)
+
+		self.dtmLayerCombo    = RasterLayerCombo(iface, self.dtmLayer   , lambda: self.value("dtmLayer"), {"groupLayers":True})
+		self.vectorLayerCombo = VectorLayerCombo(iface, self.vectorLayer, lambda: self.value("vectorLayer"), {"groupLayers":True,"hasGeometry":True, "geomType": QGis.Point})
 		self.destinationFieldCombo = FieldCombo(self.destinationField, self.vectorLayerCombo, lambda: self.value("destinationField"))
 
 	def showEvent(self, e):
@@ -47,7 +47,7 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 	@pyqtSignature("on_stopButton_pressed()")
 	def on_stopButton_pressed(self):
 		self.continueProcess = False
-		
+
 	@pyqtSignature("on_doButton_clicked()")
 	def on_doButton_clicked(self):
 		self.messageLabel.clear()
@@ -58,8 +58,8 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		fieldName = self.destinationFieldCombo.getFieldName()
 		interpol = self.interpolationMethod.currentIndex()
 		additionValue = self.additionValue.value()
-		
-		if dtmLayer    is None: 
+
+		if dtmLayer    is None:
 			self.messageLabel.setText("specify DTM layer")
 			return
 		if vectorLayer is None:
@@ -108,7 +108,7 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		self.progressBar.hide()
 		self.stopButton.hide()
 
-			
+
 	def calculateElevation(self, dtmLayer, vectorLayer, f, fieldIdx, interpolMethod, additionValue):
 		prov = dtmLayer.dataProvider()
 		thePoint = f.geometry().asPoint()
@@ -125,10 +125,10 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 			myExtent = prov.extent()
 			theWidth  = prov.xSize()
 			theHeight = prov.ySize()
-			xres = myExtent.width()  / theWidth 
+			xres = myExtent.width()  / theWidth
 			yres = myExtent.height() / theHeight
 			col = round(( x - myExtent.xMinimum() ) / xres )
-			row = round(( myExtent.yMaximum() - y ) / yres )		
+			row = round(( myExtent.yMaximum() - y ) / yres )
 			xMin = myExtent.xMinimum() + (col-1) * xres
 			xMax = xMin + 2*xres
 			yMax = myExtent.yMaximum() - (row-1) * yres
@@ -157,10 +157,10 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 			myExtent = prov.extent()
 			theWidth  = prov.xSize()
 			theHeight = prov.ySize()
-			xres = myExtent.width()  / theWidth 
+			xres = myExtent.width()  / theWidth
 			yres = myExtent.height() / theHeight
 			col = round(( x - myExtent.xMinimum() ) / xres )
-			row = round(( myExtent.yMaximum() - y ) / yres )		
+			row = round(( myExtent.yMaximum() - y ) / yres )
 			xMin = myExtent.xMinimum() + (col-2) * xres
 			xMax = xMin + 4*xres
 			yMax = myExtent.yMaximum() - (row-2) * yres
@@ -177,7 +177,7 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 			fz = interpolate.interp2d(vx,vy,vz,kind='cubic')
 			alt = asscalar( fz(x,y)[0] )
 
-		if alt is not None and prov.isNoDataValue( 1, alt ): 
+		if alt is not None and prov.isNoDataValue( 1, alt ):
 			alt = None
 		if alt is not None:
 			alt += additionValue
