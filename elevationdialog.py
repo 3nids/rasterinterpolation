@@ -182,5 +182,5 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
 		if alt is not None:
 			alt += additionValue
 		res = vectorLayer.changeAttributeValue( f.id(), fieldIdx, alt )
-		print alt, res
+		#print alt, res
 
