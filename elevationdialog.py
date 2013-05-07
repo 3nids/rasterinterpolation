@@ -127,7 +127,7 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
             x = thePoint.x()
             y = thePoint.y()
             myExtent = prov.extent()
-            theWidth  = prov.xSize()
+            theWidth = prov.xSize()
             theHeight = prov.ySize()
             xres = myExtent.width()  / theWidth
             yres = myExtent.height() / theHeight
@@ -181,7 +181,7 @@ class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
             fz = interpolate.interp2d(vx, vy, vz, kind='cubic')
             alt = asscalar(fz(x, y)[0])
 
-        if alt is not None and prov.isNoDataValue(1, alt):
+        if alt is not None and alt == prov.noDataValue():
             alt = None
         if alt is not None:
             alt += additionValue
