@@ -182,7 +182,7 @@ class ElevationDialog(QDialog, Ui_LandIt, SettingDialog):
             fz = interpolate.interp2d(vx, vy, vz, kind='cubic')
             alt = asscalar(fz(x, y)[0])
 
-        if alt is not None and alt == prov.noDataValue():
+        if alt is not None and alt == prov.srcNoDataValue(1):
             alt = None
         if alt is not None:
             alt += additionValue
