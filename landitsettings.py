@@ -6,25 +6,20 @@ Denis Rouzaud
 denis.rouzaud@gmail.com
 Jan. 2013
 """
-from PyQt4.QtGui import QColor,QDialog
 
-from qgistools.pluginsettings import *
+from qgissettingmanager import *
 
 pluginName = "landit"
-landItSettings = [
-          # global settings
-          String(pluginName, "interpolationMethod", "global",  ""     , {"comboMode": "text"}),
-          Bool(pluginName, "processOnlyNull"    , "global",  False)                        ,
-          Bool(pluginName, "processOnlySelected", "global",  False)                        ,
-          # project settings
-          Double(pluginName, "additionValue"      , "project", 0)                        ,
-          # fields and layers
-          String(pluginName, "dtmLayer"           , "project", "")                        ,
-          String(pluginName, "vectorLayer"        , "project", "")                        ,
-          String(pluginName, "destinationField"   , "project", "")
-          ]
 
 
-class LandItSettings(PluginSettings):
+class LandItSettings(SettingManager):
     def __init__(self):
-        PluginSettings.__init__(self, pluginName, landItSettings)
+        SettingManager.__init__(self, pluginName)
+        self.addSetting("interpolationMethod", "string", "global", "", {"comboMode": "text"})
+        self.addSetting("processOnlyNull", "bool", "global", False)
+        self.addSetting("processOnlySelected", "bool", "global", False)
+        self.addSetting("additionValue", "double", "project", 0)
+        self.addSetting("dtmLayer", "string", "project", "")
+        self.addSetting("vectorLayer", "string", "project", "")
+        self.addSetting("destinationField", "string", "project", "")
+

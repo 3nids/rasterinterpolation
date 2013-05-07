@@ -5,11 +5,12 @@ denis.rouzaud@gmail.com
 March 2013
 """
 
-# Import the PyQt and QGIS libraries
 from PyQt4.QtCore import Qt, pyqtSignature, QCoreApplication
 from PyQt4.QtGui import QDialog
 from qgis.core import QGis, QgsFeature, QgsFeatureRequest, QgsRasterDataProvider, QgsRectangle
 
+from qgiscombomanager import VectorLayerCombo, RasterLayerCombo, FieldCombo
+from qgissettingmanager import SettingDialog
 
 try:
     from scipy import interpolate
@@ -20,30 +21,30 @@ except:
 
 from ui.ui_landit import Ui_LandIt
 
-from landitsettings import pluginName,landItSettings
-from qgistools.pluginsettings import PluginSettings
-from qgistools.gui import VectorLayerCombo, FieldCombo, RasterLayerCombo
+from landitsettings import LandItSettings
 
 
-class ElevationDialog(QDialog, Ui_LandIt, PluginSettings):
+class ElevationDialog(QDialog, Ui_LandIt, SettingDialog):
     def __init__(self, iface):
         QDialog.__init__(self)
         self.setupUi(self)
-        self.setWindowFlags(Qt.WindowStaysOnTopHint)
-
+        self.settings = LandItSettings()
         setValuesOnDialogAccepted = False
         setValueOnWidgetUpdate = True
-        PluginSettings.__init__(self, pluginName, landItSettings, setValuesOnDialogAccepted, setValueOnWidgetUpdate)
+        SettingDialog.__init__(self, self.settings, setValuesOnDialogAccepted, setValueOnWidgetUpdate)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
+        legendInterface = iface.legendInterface()
 
-        self.dtmLayerCombo = RasterLayerCombo(iface, self.dtmLayer,
-                                              lambda: self.value("dtmLayer"), {"groupLayers": True})
-        self.vectorLayerCombo = VectorLayerCombo(iface, self.vectorLayer, lambda: self.value("vectorLayer"),
-                                                 {"groupLayers":True,"hasGeometry":True, "geomType": QGis.Point})
+        self.dtmLayerCombo = RasterLayerCombo(legendInterface, self.dtmLayer,
+                                              lambda: self.settings.value("dtmLayer"), {"groupLayers": True})
+        self.vectorLayerCombo = VectorLayerCombo(legendInterface, self.vectorLayer,
+                                                 lambda: self.settings.value("vectorLayer"),
+                                                 {"groupLayers": True, "hasGeometry": True, "geomType": QGis.Point})
         self.destinationFieldCombo = FieldCombo(self.destinationField, self.vectorLayerCombo,
-                                                lambda: self.value("destinationField"))
+                                                lambda: self.settings.value("destinationField"))
 
     def showEvent(self, e):
-        PluginSettings.showEvent(self, e)
+        SettingDialog.showEvent(self, e)
         self.progressBar.hide()
         self.stopButton.hide()
         self.messageLabel.clear()
