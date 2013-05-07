@@ -4,6 +4,7 @@ name=Land It
 description=Land It is a plugin to calculate elevations from a raster DTM and save the results in the layer.
 version=1.1
 qgisMinimumVersion=1.9
+qgisMaximumVersion=2.9
 icon=icons/landit.png
 
 tags=DTM,DEM,terrain,elevation,ground
