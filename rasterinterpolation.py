@@ -10,7 +10,7 @@ from PyQt4.QtGui import QAction, QIcon, QDesktopServices
 
 import resources
 
-from gui.elevationdialog import ElevationDialog
+from gui.maindialog import MainDialog
 
 
 class RasterInterpolation ():
@@ -18,17 +18,19 @@ class RasterInterpolation ():
         self.iface = iface
 
     def initGui(self):
-        self.elevationDialog = ElevationDialog(self.iface)
-          
         self.elevationAction = QAction(QIcon(":/plugins/rasterinterpolation/icons/rasterinterpolation.png"),
                                        "Raster Interpolation - calculate elevations", self.iface.mainWindow())
-        self.elevationAction.triggered.connect(self.elevationDialog.show)
+        self.elevationAction.triggered.connect(self.showDialog)
         self.iface.addToolBarIcon(self.elevationAction)
         self.iface.addPluginToMenu("&Raster Interpolation", self.elevationAction)
         # help
         self.helpAction = QAction("help", self.iface.mainWindow())
         self.helpAction.triggered.connect(self.help)
         self.iface.addPluginToMenu("&Raster Interpolation", self.helpAction)
+
+    def showDialog(self):
+        self.dialog = MainDialog(self.iface.legendInterface())
+        self.dialog.show()
           
     def help(self):
         QDesktopServices.openUrl(QUrl("https://github.com/3nids/rasterinterpolation"))

@@ -1,4 +1,4 @@
-from qgis.core import QgsRasterDataProvider, QgsRectangle
+from qgis.core import QgsRaster, QgsRectangle
 
 try:
     from scipy import interpolate
@@ -18,6 +18,7 @@ class RasterInterpolator():
         self.myExtent = self.dataProv.extent()
         self.theWidth = self.dataProv.xSize()
         self.theHeight = self.dataProv.ySize()
+        
         if interpolMethod == 0:
             self.interpolate = lambda(thePoint): self.nearestNeighbor(thePoint)
         elif interpolMethod == 1:
@@ -26,10 +27,10 @@ class RasterInterpolator():
             self.interpolate = lambda(thePoint): self.bicubic(thePoint)
 
     def nearestNeighbor(self, thePoint):
-        ident = self.dataProv.identify(thePoint, QgsRasterDataProvider.IdentifyFormatValue)
+        ident = self.dataProv.identify(thePoint, QgsRaster.IdentifyFormatValue)
         alt = None
         if ident is not None:  # and ident.has_key(choosenBand+1):
-            alt = ident[self.band].toDouble()[0]
+            alt = ident.results()[self.band].toDouble()[0]
         if alt is not None and alt == self.noDataValue:
             alt = None
         return alt

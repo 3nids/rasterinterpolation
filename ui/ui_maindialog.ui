@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ElevationDialog</class>
- <widget class="QDialog" name="ElevationDialog">
+ <class>MainDialog</class>
+ <widget class="QDialog" name="MainDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>498</width>
-    <height>404</height>
+    <width>403</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -200,7 +200,14 @@
        <number>0</number>
       </property>
       <item row="0" column="2">
-       <widget class="QComboBox" name="rasterBand"/>
+       <widget class="QComboBox" name="rasterBand">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_6">

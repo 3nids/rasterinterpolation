@@ -9,17 +9,17 @@ from PyQt4.QtCore import Qt, pyqtSignature, QCoreApplication
 from PyQt4.QtGui import QDialog
 from qgis.core import QGis, QgsFeature, QgsFeatureRequest
 
-from qgiscombomanager import VectorLayerCombo, RasterLayerCombo, FieldCombo
-from qgissettingmanager import SettingDialog
+from ..qgiscombomanager import VectorLayerCombo, RasterLayerCombo, FieldCombo, BandCombo
+from ..qgissettingmanager import SettingDialog
 
 from ..core.mysettings import MySettings
 from ..core.rasterinterpolator import RasterInterpolator, ScipyAvailable
 
-from ..ui.ui_elevationdialog import Ui_ElevationDialog
+from ..ui.ui_maindialog import Ui_MainDialog
 
 
-class ElevationDialog(QDialog, Ui_ElevationDialog, SettingDialog):
-    def __init__(self, iface):
+class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
+    def __init__(self, legendInterface):
         QDialog.__init__(self)
         self.setupUi(self)
         self.settings = MySettings()
@@ -27,15 +27,16 @@ class ElevationDialog(QDialog, Ui_ElevationDialog, SettingDialog):
         setValueOnWidgetUpdate = True
         SettingDialog.__init__(self, self.settings, setValuesOnDialogAccepted, setValueOnWidgetUpdate)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
-        legendInterface = iface.legendInterface()
 
-        self.rasterLayerCombo = RasterLayerCombo(legendInterface, self.rasterLayer,
-                                              lambda: self.settings.value("rasterLayer"), {"groupLayers": True})
-        self.vectorLayerCombo = VectorLayerCombo(legendInterface, self.vectorLayer,
-                                                 lambda: self.settings.value("vectorLayer"),
-                                                 {"groupLayers": True, "hasGeometry": True, "geomType": QGis.Point})
-        self.destinationFieldCombo = FieldCombo(self.destinationField, self.vectorLayerCombo,
-                                                lambda: self.settings.value("destinationField"))
+        self.rasterLayerManager = RasterLayerCombo(legendInterface, self.rasterLayer,
+                                                   lambda: self.settings.value("rasterLayer"), {"groupLayers": True})
+        self.rasterBandManager = BandCombo(self.rasterBand, self.rasterLayerManager,
+                                           lambda: self.settings.value("rasterBand"))
+        self.vectorLayerManager = VectorLayerCombo(legendInterface, self.vectorLayer,
+                                                   lambda: self.settings.value("vectorLayer"),
+                                                   {"groupLayers": True, "hasGeometry": True, "geomType": QGis.Point})
+        self.destinationFieldManager = FieldCombo(self.destinationField, self.vectorLayerManager,
+                                                  lambda: self.settings.value("destinationField"))
 
     def showEvent(self, e):
         SettingDialog.showEvent(self, e)
@@ -51,11 +52,11 @@ class ElevationDialog(QDialog, Ui_ElevationDialog, SettingDialog):
     def on_doButton_clicked(self):
         self.messageLabel.clear()
         self.continueProcess = True
-        rasterLayer = self.rasterLayerCombo.getLayer()
-        band = self.rasterBand.getFieldIndex()+1
-        vectorLayer = self.vectorLayerCombo.getLayer()
-        fieldIdx = self.destinationFieldCombo.getFieldIndex()
-        fieldName = self.destinationFieldCombo.getFieldName()
+        rasterLayer = self.rasterLayerManager.getLayer()
+        band = self.rasterBandManager.getBand()
+        vectorLayer = self.vectorLayerManager.getLayer()
+        fieldIdx = self.destinationFieldManager.getFieldIndex()
+        fieldName = self.destinationFieldManager.getFieldName()
         interpol = self.interpolationMethod.currentIndex()
         additionValue = self.additionValue.value()
 
@@ -64,6 +65,9 @@ class ElevationDialog(QDialog, Ui_ElevationDialog, SettingDialog):
             return
         if vectorLayer is None:
             self.messageLabel.setText("specify source layer")
+            return
+        if band == 0:
+            self.messageLabel.setText("specify a band fro the raster layer")
             return
         if not vectorLayer.isEditable():
             self.messageLabel.setText("source layer must editable")
@@ -75,7 +79,7 @@ class ElevationDialog(QDialog, Ui_ElevationDialog, SettingDialog):
             self.messageLabel.setText("scipy must be installed for cubic interpolation")
             return
 
-        rasterInterpolator = RasterInterpolator(rasterLayer, vectorLayer, interpol, band)
+        rasterInterpolator = RasterInterpolator(rasterLayer, interpol, band)
         self.progressBar.setMinimum(0)
         self.progressBar.setMaximum(1)
         self.progressBar.setValue(0)
@@ -113,7 +117,7 @@ class ElevationDialog(QDialog, Ui_ElevationDialog, SettingDialog):
 
     def writeInterpolation(self, f, fieldIdx, interpolator, vectorLayer, additionValue):
         thePoint = f.geometry().asPoint()
-        alt = interpolator.elevation(thePoint)
+        alt = interpolator.interpolate(thePoint)
         if alt is not None:
             alt += additionValue
         vectorLayer.changeAttributeValue(f.id(), fieldIdx, alt)

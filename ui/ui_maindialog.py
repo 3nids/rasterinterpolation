@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_elevationdialog.ui'
+# Form implementation generated from reading ui file 'ui_maindialog.ui'
 #
-# Created: Wed May  8 08:01:05 2013
+# Created: Wed May  8 10:42:11 2013
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,13 +14,13 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Ui_ElevationDialog(object):
-    def setupUi(self, ElevationDialog):
-        ElevationDialog.setObjectName(_fromUtf8("ElevationDialog"))
-        ElevationDialog.resize(498, 404)
-        self.gridLayout = QtGui.QGridLayout(ElevationDialog)
+class Ui_MainDialog(object):
+    def setupUi(self, MainDialog):
+        MainDialog.setObjectName(_fromUtf8("MainDialog"))
+        MainDialog.resize(403, 332)
+        self.gridLayout = QtGui.QGridLayout(MainDialog)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.widget = QtGui.QWidget(ElevationDialog)
+        self.widget = QtGui.QWidget(MainDialog)
         self.widget.setObjectName(_fromUtf8("widget"))
         self.gridLayout_2 = QtGui.QGridLayout(self.widget)
         self.gridLayout_2.setMargin(0)
@@ -33,10 +33,10 @@ class Ui_ElevationDialog(object):
         self.destinationField.setObjectName(_fromUtf8("destinationField"))
         self.gridLayout_2.addWidget(self.destinationField, 1, 5, 1, 1)
         self.gridLayout.addWidget(self.widget, 5, 0, 1, 3)
-        self.stopButton = QtGui.QPushButton(ElevationDialog)
+        self.stopButton = QtGui.QPushButton(MainDialog)
         self.stopButton.setObjectName(_fromUtf8("stopButton"))
         self.gridLayout.addWidget(self.stopButton, 12, 2, 1, 1)
-        self.widget_2 = QtGui.QWidget(ElevationDialog)
+        self.widget_2 = QtGui.QWidget(MainDialog)
         self.widget_2.setObjectName(_fromUtf8("widget_2"))
         self.gridLayout_3 = QtGui.QGridLayout(self.widget_2)
         self.gridLayout_3.setMargin(0)
@@ -49,10 +49,10 @@ class Ui_ElevationDialog(object):
         self.rasterLayer.setObjectName(_fromUtf8("rasterLayer"))
         self.gridLayout_3.addWidget(self.rasterLayer, 0, 1, 1, 1)
         self.gridLayout.addWidget(self.widget_2, 0, 0, 1, 3)
-        self.processOnlyNull = QtGui.QCheckBox(ElevationDialog)
+        self.processOnlyNull = QtGui.QCheckBox(MainDialog)
         self.processOnlyNull.setObjectName(_fromUtf8("processOnlyNull"))
         self.gridLayout.addWidget(self.processOnlyNull, 8, 0, 1, 3)
-        self.widget_4 = QtGui.QWidget(ElevationDialog)
+        self.widget_4 = QtGui.QWidget(MainDialog)
         self.widget_4.setObjectName(_fromUtf8("widget_4"))
         self.gridLayout_5 = QtGui.QGridLayout(self.widget_4)
         self.gridLayout_5.setMargin(0)
@@ -68,14 +68,14 @@ class Ui_ElevationDialog(object):
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.gridLayout_5.addWidget(self.label_3, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.widget_4, 6, 0, 1, 3)
-        self.progressBar = QtGui.QProgressBar(ElevationDialog)
+        self.progressBar = QtGui.QProgressBar(MainDialog)
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.gridLayout.addWidget(self.progressBar, 12, 0, 1, 1)
-        self.processOnlySelected = QtGui.QCheckBox(ElevationDialog)
+        self.processOnlySelected = QtGui.QCheckBox(MainDialog)
         self.processOnlySelected.setObjectName(_fromUtf8("processOnlySelected"))
         self.gridLayout.addWidget(self.processOnlySelected, 9, 0, 1, 3)
-        self.widget_5 = QtGui.QWidget(ElevationDialog)
+        self.widget_5 = QtGui.QWidget(MainDialog)
         self.widget_5.setObjectName(_fromUtf8("widget_5"))
         self.gridLayout_6 = QtGui.QGridLayout(self.widget_5)
         self.gridLayout_6.setMargin(0)
@@ -92,13 +92,13 @@ class Ui_ElevationDialog(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.gridLayout_6.addItem(spacerItem, 0, 2, 1, 1)
         self.gridLayout.addWidget(self.widget_5, 7, 0, 1, 3)
-        self.messageLabel = QtGui.QLabel(ElevationDialog)
+        self.messageLabel = QtGui.QLabel(MainDialog)
         self.messageLabel.setObjectName(_fromUtf8("messageLabel"))
         self.gridLayout.addWidget(self.messageLabel, 11, 0, 1, 2)
-        self.doButton = QtGui.QPushButton(ElevationDialog)
+        self.doButton = QtGui.QPushButton(MainDialog)
         self.doButton.setObjectName(_fromUtf8("doButton"))
         self.gridLayout.addWidget(self.doButton, 11, 2, 1, 1)
-        self.widget_3 = QtGui.QWidget(ElevationDialog)
+        self.widget_3 = QtGui.QWidget(MainDialog)
         self.widget_3.setObjectName(_fromUtf8("widget_3"))
         self.gridLayout_4 = QtGui.QGridLayout(self.widget_3)
         self.gridLayout_4.setMargin(0)
@@ -111,7 +111,7 @@ class Ui_ElevationDialog(object):
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout_4.addWidget(self.label, 1, 0, 1, 1)
         self.gridLayout.addWidget(self.widget_3, 2, 0, 1, 3)
-        self.widget_6 = QtGui.QWidget(ElevationDialog)
+        self.widget_6 = QtGui.QWidget(MainDialog)
         self.widget_6.setObjectName(_fromUtf8("widget_6"))
         self.gridLayout_7 = QtGui.QGridLayout(self.widget_6)
         self.gridLayout_7.setMargin(0)
@@ -119,6 +119,7 @@ class Ui_ElevationDialog(object):
         self.gridLayout_7.setVerticalSpacing(0)
         self.gridLayout_7.setObjectName(_fromUtf8("gridLayout_7"))
         self.rasterBand = QtGui.QComboBox(self.widget_6)
+        self.rasterBand.setMinimumSize(QtCore.QSize(120, 0))
         self.rasterBand.setObjectName(_fromUtf8("rasterBand"))
         self.gridLayout_7.addWidget(self.rasterBand, 0, 2, 1, 1)
         self.label_6 = QtGui.QLabel(self.widget_6)
@@ -128,24 +129,24 @@ class Ui_ElevationDialog(object):
         self.gridLayout_7.addItem(spacerItem1, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.widget_6, 1, 0, 1, 3)
 
-        self.retranslateUi(ElevationDialog)
+        self.retranslateUi(MainDialog)
         self.interpolationMethod.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(ElevationDialog)
+        QtCore.QMetaObject.connectSlotsByName(MainDialog)
 
-    def retranslateUi(self, ElevationDialog):
-        ElevationDialog.setWindowTitle(QtGui.QApplication.translate("ElevationDialog", "Raster Interpolation", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("ElevationDialog", "Destination field", None, QtGui.QApplication.UnicodeUTF8))
-        self.stopButton.setText(QtGui.QApplication.translate("ElevationDialog", "Stop", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setText(QtGui.QApplication.translate("ElevationDialog", "Raster layer", None, QtGui.QApplication.UnicodeUTF8))
-        self.processOnlyNull.setText(QtGui.QApplication.translate("ElevationDialog", "process features only where destination field is NULL", None, QtGui.QApplication.UnicodeUTF8))
-        self.interpolationMethod.setItemText(0, QtGui.QApplication.translate("ElevationDialog", "nearest neighbor", None, QtGui.QApplication.UnicodeUTF8))
-        self.interpolationMethod.setItemText(1, QtGui.QApplication.translate("ElevationDialog", "bi-linear", None, QtGui.QApplication.UnicodeUTF8))
-        self.interpolationMethod.setItemText(2, QtGui.QApplication.translate("ElevationDialog", "bi-cubic", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("ElevationDialog", "Interpolation method", None, QtGui.QApplication.UnicodeUTF8))
-        self.processOnlySelected.setText(QtGui.QApplication.translate("ElevationDialog", "process only selected features", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_5.setText(QtGui.QApplication.translate("ElevationDialog", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.messageLabel.setText(QtGui.QApplication.translate("ElevationDialog", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
-        self.doButton.setText(QtGui.QApplication.translate("ElevationDialog", "GO", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("ElevationDialog", "Points from layer", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_6.setText(QtGui.QApplication.translate("ElevationDialog", "Band", None, QtGui.QApplication.UnicodeUTF8))
+    def retranslateUi(self, MainDialog):
+        MainDialog.setWindowTitle(QtGui.QApplication.translate("MainDialog", "Raster Interpolation", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("MainDialog", "Destination field", None, QtGui.QApplication.UnicodeUTF8))
+        self.stopButton.setText(QtGui.QApplication.translate("MainDialog", "Stop", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("MainDialog", "Raster layer", None, QtGui.QApplication.UnicodeUTF8))
+        self.processOnlyNull.setText(QtGui.QApplication.translate("MainDialog", "process features only where destination field is NULL", None, QtGui.QApplication.UnicodeUTF8))
+        self.interpolationMethod.setItemText(0, QtGui.QApplication.translate("MainDialog", "nearest neighbor", None, QtGui.QApplication.UnicodeUTF8))
+        self.interpolationMethod.setItemText(1, QtGui.QApplication.translate("MainDialog", "bi-linear", None, QtGui.QApplication.UnicodeUTF8))
+        self.interpolationMethod.setItemText(2, QtGui.QApplication.translate("MainDialog", "bi-cubic", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("MainDialog", "Interpolation method", None, QtGui.QApplication.UnicodeUTF8))
+        self.processOnlySelected.setText(QtGui.QApplication.translate("MainDialog", "process only selected features", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("MainDialog", "Add", None, QtGui.QApplication.UnicodeUTF8))
+        self.messageLabel.setText(QtGui.QApplication.translate("MainDialog", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
+        self.doButton.setText(QtGui.QApplication.translate("MainDialog", "GO", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("MainDialog", "Points from layer", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("MainDialog", "Band", None, QtGui.QApplication.UnicodeUTF8))
 
