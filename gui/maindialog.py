@@ -28,13 +28,13 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
         SettingDialog.__init__(self, self.settings, setValuesOnDialogAccepted, setValueOnWidgetUpdate)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
 
-        self.rasterLayerManager = RasterLayerCombo(legendInterface, self.rasterLayer,
-                                                   lambda: self.settings.value("rasterLayer"), {"groupLayers": True})
+        self.rasterLayerManager = RasterLayerCombo(self.rasterLayer, lambda: self.settings.value("rasterLayer"),
+                                                   {"groupLayers": True, "legendInterface": legendInterface})
         self.rasterBandManager = BandCombo(self.rasterBand, self.rasterLayerManager,
                                            lambda: self.settings.value("rasterBand"))
-        self.vectorLayerManager = VectorLayerCombo(legendInterface, self.vectorLayer,
-                                                   lambda: self.settings.value("vectorLayer"),
-                                                   {"groupLayers": True, "hasGeometry": True, "geomType": QGis.Point})
+        self.vectorLayerManager = VectorLayerCombo(self.vectorLayer, lambda: self.settings.value("vectorLayer"),
+                                                   {"groupLayers": True, "legendInterface": legendInterface,
+                                                    "hasGeometry": True, "geomType": QGis.Point})
         self.destinationFieldManager = FieldCombo(self.destinationField, self.vectorLayerManager,
                                                   lambda: self.settings.value("destinationField"))
 
