@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Rasterinterpolation by 3nids</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Rasterinterpolation</h1>
+        <p>QGIS plugin to interpolate values on raster layers</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/3nids/rasterinterpolation" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/3nids/rasterinterpolation/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/3nids/rasterinterpolation/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h2>About</h2>
+
+<p><strong>Raster Interpolation</strong> is a <a href="http://www.qgis.org">QGIS</a> plugin to interpolates values on raster layers.</p>
+
+<p>The plugin will loop through a layer of points, interpolate the value at their position on the raster and save this value in the chosen field.</p>
+
+<p>It can be used to calculate elevation from a DTM.</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Interpolation: nearest neighbot, linear or bicubic* interpolation</li>
+<li>Process can be limited to a selection or to yet undefined values</li>
+<li>Choose band to process in the raster</li>
+</ul><p>*<a href="http://www.scipy.org/">scipy</a> is required</p>
+
+<h2>Screenshot</h2>
+
+<p><img src="https://raw.github.com/3nids/rasterinterpolation/master/doc/screenshot.png" alt="screenshot"></p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/3nids">3nids</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
