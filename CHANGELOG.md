@@ -1,6 +1,6 @@
 
 
-## Version 1.1 xx
+## Version 1.1 08.05.2013
 
 * Plugin renamed to Raster Interpolation
 * Can choose band

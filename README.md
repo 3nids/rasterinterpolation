@@ -13,3 +13,7 @@ It can be used to calculate elevation from a DTM.
 * Choose band to process in the raster
 
 *[scipy](http://www.scipy.org/) is required
+
+## Screenshot
+
+!(https//raw.github.com/3nids/rasterinterpolation/tree/master/doc/screenshot.png)
