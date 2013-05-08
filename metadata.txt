@@ -8,7 +8,7 @@ qgisMaximumVersion=2.9
 icon=icons/rasterinterpolation.png
 
 tags=DTM,DEM,terrain,elevation,ground,raster,interpolation,bicubic,linear
-homepage=https://github.com/3nids/rasterinterpolation/wiki
+homepage=http://3nids.github.io/rasterinterpolation
 tracker=https://github.com/3nids/rasterinterpolation/issues
 repository=https://github.com/3nids/rasterinterpolation
 

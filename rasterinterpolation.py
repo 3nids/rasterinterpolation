@@ -33,7 +33,7 @@ class RasterInterpolation ():
         self.dialog.show()
           
     def help(self):
-        QDesktopServices.openUrl(QUrl("https://github.com/3nids/rasterinterpolation"))
+        QDesktopServices.openUrl(QUrl("http://3nids.github.io/rasterinterpolation"))
 
     def unload(self):
         self.iface.removePluginMenu("&Raster Interpolation", self.elevationAction)
