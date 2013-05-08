@@ -1,16 +1,16 @@
 
 [general]
-name=Land It
-description=Land It is a plugin to calculate elevations from a raster DTM and save the results in the layer.
+name=Raster Interpolation
+description=Raster Interpolation interpolates values on a raster from points of a vector layer and store the results in a field of this vector layer.
 version=1.1
 qgisMinimumVersion=1.9
 qgisMaximumVersion=2.9
-icon=icons/landit.png
+icon=icons/rasterinterpolation.png
 
-tags=DTM,DEM,terrain,elevation,ground
-homepage=https://github.com/3nids/landit/wiki
-tracker=https://github.com/3nids/landit/issues
-repository=https://github.com/3nids/landit
+tags=DTM,DEM,terrain,elevation,ground,raster,interpolation,bicubic,linear
+homepage=https://github.com/3nids/rasterinterpolation/wiki
+tracker=https://github.com/3nids/rasterinterpolation/issues
+repository=https://github.com/3nids/rasterinterpolation
 
 author=Denis Rouzaud
 email=denis.rouzaud@gmail.com

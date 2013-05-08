@@ -9,17 +9,18 @@ Jan. 2013
 
 from qgissettingmanager import *
 
-pluginName = "landit"
+pluginName = "rasterInterpolation"
 
 
-class LandItSettings(SettingManager):
+class MySettings(SettingManager):
     def __init__(self):
         SettingManager.__init__(self, pluginName)
         self.addSetting("interpolationMethod", "string", "global", "", {"comboMode": "text"})
         self.addSetting("processOnlyNull", "bool", "global", False)
         self.addSetting("processOnlySelected", "bool", "global", False)
         self.addSetting("additionValue", "double", "project", 0)
-        self.addSetting("dtmLayer", "string", "project", "")
+        self.addSetting("rasterLayer", "string", "project", "")
+        self.addSetting("rasterBand", "integer", "project", 0)
         self.addSetting("vectorLayer", "string", "project", "")
         self.addSetting("destinationField", "string", "project", "")
 

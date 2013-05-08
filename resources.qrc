@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/plugins/landit" >
-        <file>icons/landit.png</file>
+    <qresource prefix="/plugins/rasterinterpolation" >
+        <file>icons/rasterinterpolation.png</file>
     </qresource>
 </RCC>

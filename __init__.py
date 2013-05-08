@@ -6,8 +6,8 @@ March. 2012
 """
 
 def classFactory(iface):
-    from landit import LandIt
-    return LandIt(iface)
+    from rasterinterpolation import RasterInterpolation
+    return RasterInterpolation(iface)
     
 
 
