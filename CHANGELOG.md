@@ -1,4 +1,7 @@
 
+## Version 1.2 20.06.2013
+
+* Updated to new API
 
 ## Version 1.1 08.05.2013
 
