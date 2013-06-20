@@ -3,8 +3,8 @@
 name=Raster Interpolation
 description=Raster Interpolation interpolates values on a raster from points of a vector layer and store the results in a field of this vector layer.
 version=1.1
-qgisMinimumVersion=1.9
-qgisMaximumVersion=2.9
+qgisMinimumVersion=2.0
+
 icon=icons/rasterinterpolation.png
 
 tags=DTM,DEM,terrain,elevation,ground,raster,interpolation,bicubic,linear
