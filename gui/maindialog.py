@@ -94,7 +94,7 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
                 k += 1
                 self.progressBar.setValue(k)
                 vectorLayer.getFeatures(QgsFeatureRequest(fid)).nextFeature(f)
-                if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
+                if self.processOnlyNull.isChecked() and not f[fieldName] is None:
                     continue
                 self.writeInterpolation(f, fieldIdx, rasterInterpolator, vectorLayer, additionValue)
                 QCoreApplication.processEvents()
@@ -106,7 +106,7 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
             while iterator.nextFeature(f):
                 k += 1
                 self.progressBar.setValue(k)
-                if self.processOnlyNull.isChecked() and not f.attribute(fieldName).isNull():
+                if self.processOnlyNull.isChecked() and not f[fieldName] is None:
                     continue
                 self.writeInterpolation(f, fieldIdx, rasterInterpolator, vectorLayer, additionValue)
                 QCoreApplication.processEvents()
