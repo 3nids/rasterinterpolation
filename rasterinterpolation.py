@@ -29,7 +29,7 @@ class RasterInterpolation ():
         self.iface.addPluginToMenu("&Raster Interpolation", self.helpAction)
 
     def showDialog(self):
-        self.dialog = MainDialog(self.iface.legendInterface())
+        self.dialog = MainDialog(self.iface)
         self.dialog.show()
           
     def help(self):
