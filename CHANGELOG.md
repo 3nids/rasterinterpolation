@@ -1,4 +1,9 @@
 
+## Version 1.3 01.07.2013
+
+* Use message bar for a better communication to the user
+* [#Fix 1] fix last old API stuff
+
 ## Version 1.2 20.06.2013
 
 * Updated to new API
