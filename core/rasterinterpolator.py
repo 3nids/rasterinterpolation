@@ -30,7 +30,10 @@ class RasterInterpolator():
         ident = self.dataProv.identify(thePoint, QgsRaster.IdentifyFormatValue)
         alt = None
         if ident is not None:  # and ident.has_key(choosenBand+1):
-            alt = float(ident.results()[self.band])
+            try:
+                alt = float(ident.results()[self.band])
+            except TypeError:
+                alt = None
         if alt is not None and alt == self.noDataValue:
             alt = None
         return alt
