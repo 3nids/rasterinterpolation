@@ -1,4 +1,8 @@
 
+## Version 1.3.1 02.07.2013
+
+* [fix #2] TypeError if point was outside of DTM using nearest neighbor
+
 ## Version 1.3 01.07.2013
 
 * Use message bar for a better communication to the user
