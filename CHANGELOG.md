@@ -1,4 +1,8 @@
 
+## Version 1.3.2 10.07.2013
+
+* [fix #3] handle noDataValue interpolation
+
 ## Version 1.3.1 02.07.2013
 
 * [fix #2] TypeError if point was outside of DTM using nearest neighbor

@@ -2,7 +2,7 @@
 [general]
 name=Raster Interpolation
 description=Raster Interpolation interpolates values on a raster from points of a vector layer and store the results in a field of this vector layer.
-version=1.3.1
+version=1.3.2
 qgisMinimumVersion=2.0
 
 icon=icons/rasterinterpolation.png
