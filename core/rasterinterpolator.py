@@ -58,6 +58,8 @@ class RasterInterpolator():
         v22 = myBlock.value(0, 1)
         v11 = myBlock.value(1, 0)
         v21 = myBlock.value(1, 1)
+        if self.noDataValue in (v12, v22, v11, v21):
+            return None
         x1 = xMin+xres/2
         x2 = xMax-xres/2
         y1 = yMin+yres/2
@@ -66,9 +68,9 @@ class RasterInterpolator():
                + v21*(x - x1)*(y2 - y)
                + v12*(x2 - x)*(y - y1)
                + v22*(x - x1)*(y - y1)
-              )/((x2 - x1)*(y2 - y1))
+               )/((x2 - x1)*(y2 - y1))
         if alt is not None and alt == self.noDataValue:
-            alt = None
+            return None
         return alt
 
     def bicubic(self, thePoint):
@@ -93,9 +95,10 @@ class RasterInterpolator():
               [myBlock.value(2, 0), myBlock.value(2, 1), myBlock.value(2, 2), myBlock.value(2, 3)],
               [myBlock.value(1, 0), myBlock.value(1, 1), myBlock.value(1, 2), myBlock.value(1, 3)],
               [myBlock.value(0, 0), myBlock.value(0, 1), myBlock.value(0, 2), myBlock.value(0, 3)]]
+        if self.noDataValue in vz:
+            return None
         fz = interpolate.interp2d(vx, vy, vz, kind='cubic')
         alt = asscalar(fz(x, y)[0])
-
         if alt is not None and alt == self.noDataValue:
-            alt = None
+            return None
         return alt
