@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>403</width>
+    <width>402</width>
     <height>332</height>
    </rect>
   </property>
@@ -14,110 +14,6 @@
    <string>Raster Interpolation</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="12" column="1">
-    <widget class="QPushButton" name="stopButton">
-     <property name="text">
-      <string>Stop</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QWidget" name="widget_2" native="true">
-     <layout class="QGridLayout" name="gridLayout_3">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Raster layer</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="rasterLayer"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QWidget" name="widget" native="true">
-     <layout class="QGridLayout" name="gridLayout_2">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <item row="1" column="4">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Destination field</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="5">
-       <widget class="QComboBox" name="destinationField"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="8" column="0" colspan="2">
-    <widget class="QCheckBox" name="processOnlyNull">
-     <property name="text">
-      <string>process features only where destination field is NULL</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0" colspan="2">
-    <widget class="QWidget" name="widget_4" native="true">
-     <layout class="QGridLayout" name="gridLayout_5">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="interpolationMethod">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <item>
-         <property name="text">
-          <string>nearest neighbor</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>bi-linear</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>bi-cubic</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Interpolation method</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="12" column="0">
-    <widget class="QProgressBar" name="progressBar">
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0" colspan="2">
-    <widget class="QCheckBox" name="processOnlySelected">
-     <property name="text">
-      <string>process only selected features</string>
-     </property>
-    </widget>
-   </item>
    <item row="7" column="0" colspan="2">
     <widget class="QWidget" name="widget_5" native="true">
      <layout class="QGridLayout" name="gridLayout_6">
@@ -127,7 +23,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Add</string>
+         <string>Add to value</string>
         </property>
        </widget>
       </item>
@@ -157,10 +53,107 @@
      </layout>
     </widget>
    </item>
+   <item row="12" column="1">
+    <widget class="QPushButton" name="stopButton">
+     <property name="text">
+      <string>Stop</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0">
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>24</number>
+     </property>
+    </widget>
+   </item>
    <item row="11" column="1">
     <widget class="QPushButton" name="doButton">
      <property name="text">
       <string>GO</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item row="1" column="4">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Destination field</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QComboBox" name="destinationField"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QWidget" name="widget_2" native="true">
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Raster layer</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="rasterLayer"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="2">
+    <widget class="QWidget" name="widget_4" native="true">
+     <layout class="QGridLayout" name="gridLayout_5">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="interpolationMethod">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>nearest neighbor</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>bi-linear</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>bi-cubic</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Interpolation method</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="2">
+    <widget class="QCheckBox" name="processOnlySelected">
+     <property name="text">
+      <string>process only selected features</string>
      </property>
     </widget>
    </item>
@@ -223,6 +216,13 @@
        </spacer>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="2">
+    <widget class="QCheckBox" name="processOnlyNull">
+     <property name="text">
+      <string>process features where destination field is undefined</string>
+     </property>
     </widget>
    </item>
   </layout>

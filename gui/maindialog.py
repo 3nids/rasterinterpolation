@@ -5,7 +5,7 @@ denis.rouzaud@gmail.com
 March 2013
 """
 
-from PyQt4.QtCore import Qt, pyqtSignature, QCoreApplication
+from PyQt4.QtCore import Qt, pyqtSlot, QCoreApplication
 from PyQt4.QtGui import QDialog
 from qgis.core import QGis, QgsFeature, QgsFeatureRequest
 from qgis.gui import QgsMessageBar
@@ -30,13 +30,11 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
         SettingDialog.__init__(self, self.settings, setValuesOnDialogAccepted, setValueOnWidgetUpdate)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
 
-        self.rasterLayerManager = RasterLayerCombo(self.rasterLayer, lambda: self.settings.value("rasterLayer"),
-                                                   {"emptyItemFirst": True})
+        self.rasterLayerManager = RasterLayerCombo(self.rasterLayer, lambda: self.settings.value("rasterLayer"))
         self.rasterBandManager = BandCombo(self.rasterBand, self.rasterLayerManager,
                                            lambda: self.settings.value("rasterBand"))
         self.vectorLayerManager = VectorLayerCombo(self.vectorLayer, lambda: self.settings.value("vectorLayer"),
-                                                   {"hasGeometry": True, "geomType": QGis.Point,
-                                                    "emptyItemFirst": True})
+                                                   {"hasGeometry": True, "geomType": QGis.Point})
         self.destinationFieldManager = FieldCombo(self.destinationField, self.vectorLayerManager,
                                                   lambda: self.settings.value("destinationField"))
 
@@ -45,11 +43,11 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
         self.progressBar.hide()
         self.stopButton.hide()
 
-    @pyqtSignature("on_stopButton_pressed()")
+    @pyqtSlot(name="on_stopButton_pressed")
     def on_stopButton_pressed(self):
         self.continueProcess = False
 
-    @pyqtSignature("on_doButton_clicked()")
+    @pyqtSlot(name="on_doButton_clicked")
     def on_doButton_clicked(self):
         self.continueProcess = True
         rasterLayer = self.rasterLayerManager.getLayer()
@@ -131,7 +129,7 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
 
     def writeInterpolation(self, f, fieldIdx, interpolator, vectorLayer, additionValue):
         thePoint = f.geometry().asPoint()
-        alt = interpolator.interpolate(thePoint)
-        if alt is not None:
-            alt += additionValue
-        vectorLayer.changeAttributeValue(f.id(), fieldIdx, alt)
+        value = interpolator.interpolate(thePoint)
+        if value is not None:
+            value += additionValue
+        vectorLayer.changeAttributeValue(f.id(), fieldIdx, value)

@@ -13,8 +13,11 @@ class RasterInterpolator():
         self.dataProv = rasterLayer.dataProvider()
         self.interpolMethod = interpolMethod
         self.band = band
-
-        self.noDataValue = self.dataProv.srcNoDataValue(band)
+        if self.dataProv.srcNoDataValue(band):
+            self.noDataValue = self.dataProv.srcNoDataValue(band)
+        else:
+            self.noDataValue = None
+        print self.noDataValue
         self.myExtent = self.dataProv.extent()
         self.theWidth = self.dataProv.xSize()
         self.theHeight = self.dataProv.ySize()
@@ -28,15 +31,15 @@ class RasterInterpolator():
 
     def nearestNeighbor(self, thePoint):
         ident = self.dataProv.identify(thePoint, QgsRaster.IdentifyFormatValue)
-        alt = None
+        value = None
         if ident is not None:  # and ident.has_key(choosenBand+1):
             try:
-                alt = float(ident.results()[self.band])
+                value = float(ident.results()[self.band])
             except TypeError:
-                alt = None
-        if alt is not None and alt == self.noDataValue:
-            alt = None
-        return alt
+                value = None
+        if value == self.noDataValue:
+            return None
+        return value
 
     def linear(self, thePoint):
         # see the implementation of raster data provider, identify method
@@ -64,14 +67,14 @@ class RasterInterpolator():
         x2 = xMax-xres/2
         y1 = yMin+yres/2
         y2 = yMax-yres/2
-        alt = (v11*(x2 - x)*(y2 - y)
+        value = (v11*(x2 - x)*(y2 - y)
                + v21*(x - x1)*(y2 - y)
                + v12*(x2 - x)*(y - y1)
                + v22*(x - x1)*(y - y1)
                )/((x2 - x1)*(y2 - y1))
-        if alt is not None and alt == self.noDataValue:
+        if value is not None and value == self.noDataValue:
             return None
-        return alt
+        return value
 
     def bicubic(self, thePoint):
         # see the implementation of raster data provider, identify method
@@ -88,6 +91,8 @@ class RasterInterpolator():
         yMin = yMax - 4*yres
         pixelExtent = QgsRectangle(xMin, yMin, xMax, yMax)
         myBlock = self.dataProv.block(self.band, pixelExtent, 4, 4)
+        if myBlock.hasNoDataValue() and myBlock.hasNoData():
+            return None
         # http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp2d.html
         vx = [xMin+.5*xres, xMin+1.5*xres, xMin+2.5*xres, xMin+3.5*xres]
         vy = [yMin+.5*yres, yMin+1.5*yres, yMin+2.5*yres, yMin+3.5*yres]
@@ -95,10 +100,8 @@ class RasterInterpolator():
               [myBlock.value(2, 0), myBlock.value(2, 1), myBlock.value(2, 2), myBlock.value(2, 3)],
               [myBlock.value(1, 0), myBlock.value(1, 1), myBlock.value(1, 2), myBlock.value(1, 3)],
               [myBlock.value(0, 0), myBlock.value(0, 1), myBlock.value(0, 2), myBlock.value(0, 3)]]
-        if self.noDataValue in vz:
-            return None
         fz = interpolate.interp2d(vx, vy, vz, kind='cubic')
-        alt = asscalar(fz(x, y)[0])
-        if alt is not None and alt == self.noDataValue:
+        value = asscalar(fz(x, y)[0])
+        if value is not None and value == self.noDataValue:
             return None
-        return alt
+        return value
