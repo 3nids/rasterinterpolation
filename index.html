@@ -39,15 +39,19 @@
         <ul></ul>
       </nav>
       <section>
-        <h2>About</h2>
+        <h2>
+<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
 
 <p><strong>Raster Interpolation</strong> is a <a href="http://www.qgis.org">QGIS</a> plugin to interpolates values on raster layers.</p>
 
-<p>The plugin will loop through a layer of points, interpolate the value at their position on the raster and save this value in the chosen field.</p>
+<p>It browses a vector layer of points, interpolates at their position the value of a raster layer and save the value in a chosen field of the vector layer.</p>
+
+<p>Interpolation can be nearest, linear or bi-cubic. Simple filter on the vector layer may be applied (browse only currently NULL values and/or only selected features).</p>
 
 <p>It can be used to calculate elevation from a DTM.</p>
 
-<h2>Features</h2>
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
 
 <ul>
 <li>Interpolation: nearest neighbot, linear or bicubic* interpolation</li>
@@ -55,13 +59,14 @@
 <li>Choose band to process in the raster</li>
 </ul><p>*<a href="http://www.scipy.org/">scipy</a> is required</p>
 
-<h2>Screenshot</h2>
+<h2>
+<a name="screenshot" class="anchor" href="#screenshot"><span class="octicon octicon-link"></span></a>Screenshot</h2>
 
 <p><img src="https://raw.github.com/3nids/rasterinterpolation/master/doc/screenshot.png" alt="screenshot"></p>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/3nids">3nids</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
