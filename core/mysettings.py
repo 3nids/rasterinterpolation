@@ -15,7 +15,7 @@ pluginName = "rasterInterpolation"
 class MySettings(SettingManager):
     def __init__(self):
         SettingManager.__init__(self, pluginName)
-        self.addSetting("interpolationMethod", "string", "global", "", {"comboMode": "text"})
+        self.addSetting("interpolationMethod", "string", "global", "bi-linear", {"comboMode": "text"})
         self.addSetting("processOnlyNull", "bool", "global", False)
         self.addSetting("processOnlySelected", "bool", "global", False)
         self.addSetting("additionValue", "double", "project", 0)
