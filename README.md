@@ -2,7 +2,9 @@
 
 **Raster Interpolation** is a [QGIS](http://www.qgis.org) plugin to interpolates values on raster layers.
 
-The plugin will loop through a layer of points, interpolate the value at their position on the raster and save this value in the chosen field.
+It browses a vector layer of points, interpolates at their position the value of a raster layer and save the value in a chosen field of the vector layer.
+
+Interpolation can be nearest, linear or bi-cubic. Simple filter on the vector layer may be applied (browse only currently NULL values and/or only selected features).
 
 It can be used to calculate elevation from a DTM.
 
