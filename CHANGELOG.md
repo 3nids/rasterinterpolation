@@ -1,4 +1,9 @@
 
+## Version 1.3.3 22.07.2013
+
+* [fix #3] handle noDataValue
+* default method is bi-linear
+
 ## Version 1.3.2 10.07.2013
 
 * [fix #3] handle noDataValue interpolation
