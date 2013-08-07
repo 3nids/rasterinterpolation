@@ -8,6 +8,10 @@ except ImportError:
     ScipyAvailable = False
 
 
+def isin(value, array2d):
+    return bool([x for x in array2d if value in x])
+
+
 class RasterInterpolator():
     def __init__(self, rasterLayer, interpolMethod, band):
         self.dataProv = rasterLayer.dataProvider()
@@ -17,7 +21,6 @@ class RasterInterpolator():
             self.noDataValue = self.dataProv.srcNoDataValue(band)
         else:
             self.noDataValue = None
-        print self.noDataValue
         self.myExtent = self.dataProv.extent()
         self.theWidth = self.dataProv.xSize()
         self.theHeight = self.dataProv.ySize()
@@ -91,8 +94,6 @@ class RasterInterpolator():
         yMin = yMax - 4*yres
         pixelExtent = QgsRectangle(xMin, yMin, xMax, yMax)
         myBlock = self.dataProv.block(self.band, pixelExtent, 4, 4)
-        if myBlock.hasNoDataValue() and myBlock.hasNoData():
-            return None
         # http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp2d.html
         vx = [xMin+.5*xres, xMin+1.5*xres, xMin+2.5*xres, xMin+3.5*xres]
         vy = [yMin+.5*yres, yMin+1.5*yres, yMin+2.5*yres, yMin+3.5*yres]
@@ -100,6 +101,8 @@ class RasterInterpolator():
               [myBlock.value(2, 0), myBlock.value(2, 1), myBlock.value(2, 2), myBlock.value(2, 3)],
               [myBlock.value(1, 0), myBlock.value(1, 1), myBlock.value(1, 2), myBlock.value(1, 3)],
               [myBlock.value(0, 0), myBlock.value(0, 1), myBlock.value(0, 2), myBlock.value(0, 3)]]
+        if myBlock.hasNoDataValue()and isin(self.noDataValue, vz):
+            return None
         fz = interpolate.interp2d(vx, vy, vz, kind='cubic')
         value = asscalar(fz(x, y)[0])
         if value is not None and value == self.noDataValue:
