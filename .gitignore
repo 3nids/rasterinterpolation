@@ -1,3 +1,7 @@
+tmp/
 .idea
 *.qgs
-tmp/
+ui_*.py
+resources.py
+*.qm
+
