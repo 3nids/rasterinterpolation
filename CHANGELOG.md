@@ -1,4 +1,8 @@
 
+## Version 1.3.4 07.08.2013
+
+* [fix #3] handle noDataValue
+
 ## Version 1.3.3 22.07.2013
 
 * [fix #3] handle noDataValue
