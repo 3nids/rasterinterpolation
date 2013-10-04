@@ -7,7 +7,7 @@ March 2013
 
 from PyQt4.QtCore import Qt, pyqtSlot, QCoreApplication
 from PyQt4.QtGui import QDialog
-from qgis.core import QGis, QgsFeature, QgsFeatureRequest
+from qgis.core import QGis, QgsFeature, QgsFeatureRequest, NULL
 from qgis.gui import QgsMessageBar
 
 from ..qgiscombomanager import VectorLayerCombo, RasterLayerCombo, FieldCombo, BandCombo
@@ -100,7 +100,7 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
                 k += 1
                 self.progressBar.setValue(k)
                 vectorLayer.getFeatures(QgsFeatureRequest(fid)).nextFeature(f)
-                if self.processOnlyNull.isChecked() and not f[fieldName] is None:
+                if self.processOnlyNull.isChecked() and not f[fieldName] == NULL:
                     continue
                 c += 1
                 self.writeInterpolation(f, fieldIdx, rasterInterpolator, vectorLayer, additionValue)
@@ -113,7 +113,7 @@ class MainDialog(QDialog, Ui_MainDialog, SettingDialog):
             while iterator.nextFeature(f):
                 k += 1
                 self.progressBar.setValue(k)
-                if self.processOnlyNull.isChecked() and not f[fieldName] is None:
+                if self.processOnlyNull.isChecked() and not f[fieldName] == NULL:
                     continue
                 c += 1
                 self.writeInterpolation(f, fieldIdx, rasterInterpolator, vectorLayer, additionValue)
