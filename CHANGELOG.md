@@ -1,4 +1,8 @@
 
+## Version 1.3.5 03.10.2013
+
+* fix checking undefined values (use QPyNullVariant)
+
 ## Version 1.3.4 07.08.2013
 
 * [fix #3] handle noDataValue
