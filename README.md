@@ -4,9 +4,11 @@
 
 It browses a vector layer of points, interpolates at their position the value of a raster layer and save the value in a chosen field of the vector layer.
 
-Interpolation can be nearest, linear or bi-cubic. Simple filter on the vector layer may be applied (browse only currently NULL values and/or only selected features).
+Interpolation can be nearest, linear or bi-cubic. Simple filter on the vector layer may be applied (browse only currently NULL values and/or only selected features). It can be used to calculate elevation from a DTM. 
 
-It can be used to calculate elevation from a DTM. The raster layer and the vector layer must have the same CRS (coordinate reference system).
+## Restrictions
+* The raster layer and the vector layer must have the same CRS (coordinate reference system).
+* The vector layer mustn't be a (PostGIS) multipoint layer. 
 
 ## Features
 
